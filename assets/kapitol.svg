@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d0500"/>
+      <stop offset="60%" stop-color="#3d1800"/>
+      <stop offset="100%" stop-color="#7a3505"/>
+    </linearGradient>
+    <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5a3010"/>
+      <stop offset="100%" stop-color="#2a1005"/>
+    </linearGradient>
+    <linearGradient id="marble" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0e0b0"/>
+      <stop offset="100%" stop-color="#c8a860"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky -->
+  <rect width="400" height="260" fill="url(#sky)"/>
+  <!-- Stars -->
+  <circle cx="25" cy="18" r="1.2" fill="#c9a84c" opacity="0.8"/>
+  <circle cx="60" cy="10" r="1" fill="#c9a84c" opacity="0.7"/>
+  <circle cx="120" cy="22" r="1.5" fill="#c9a84c" opacity="0.9"/>
+  <circle cx="200" cy="8" r="1" fill="#c9a84c" opacity="0.6"/>
+  <circle cx="310" cy="20" r="1.2" fill="#c9a84c" opacity="0.8"/>
+  <circle cx="370" cy="12" r="1" fill="#c9a84c" opacity="0.7"/>
+  <circle cx="50" cy="45" r="1" fill="#c9a84c" opacity="0.5"/>
+  <circle cx="350" cy="38" r="1.3" fill="#c9a84c" opacity="0.7"/>
+  <!-- Moon/Sun glow -->
+  <circle cx="60" cy="55" r="22" fill="#f8d060" opacity="0.9"/>
+  <circle cx="60" cy="55" r="30" fill="#f8d060" opacity="0.15"/>
+  <!-- Capitoline Hill -->
+  <path d="M0,260 L0,180 Q100,130 200,125 Q300,120 400,175 L400,260 Z" fill="url(#hill)"/>
+  <!-- Retaining wall -->
+  <rect x="60" y="170" width="280" height="30" rx="2" fill="#8b6030"/>
+  <rect x="55" y="165" width="290" height="8" rx="2" fill="#a07840"/>
+  <!-- Temple base / podium -->
+  <rect x="90" y="130" width="220" height="40" rx="2" fill="url(#marble)"/>
+  <!-- Steps -->
+  <rect x="155" y="168" width="90" height="8" rx="1" fill="#d4b070"/>
+  <rect x="162" y="174" width="76" height="7" rx="1" fill="#c8a060"/>
+  <!-- Temple body -->
+  <rect x="100" y="95" width="200" height="38" rx="1" fill="#f0e0a0"/>
+  <!-- Frieze decoration -->
+  <rect x="100" y="95" width="200" height="8" rx="0" fill="#c9a84c" opacity="0.6"/>
+  <!-- Columns -->
+  <g fill="#e8d090">
+    <rect x="105" y="103" width="12" height="35"/>
+    <rect x="127" y="103" width="12" height="35"/>
+    <rect x="149" y="103" width="12" height="35"/>
+    <rect x="171" y="103" width="12" height="35"/>
+    <rect x="193" y="103" width="12" height="35"/>
+    <rect x="215" y="103" width="12" height="35"/>
+    <rect x="237" y="103" width="12" height="35"/>
+    <rect x="259" y="103" width="12" height="35"/>
+    <rect x="281" y="103" width="12" height="35"/>
+  </g>
+  <!-- Column capitals -->
+  <g fill="#c9a84c" opacity="0.8">
+    <rect x="103" y="100" width="16" height="4"/>
+    <rect x="125" y="100" width="16" height="4"/>
+    <rect x="147" y="100" width="16" height="4"/>
+    <rect x="169" y="100" width="16" height="4"/>
+    <rect x="191" y="100" width="16" height="4"/>
+    <rect x="213" y="100" width="16" height="4"/>
+    <rect x="235" y="100" width="16" height="4"/>
+    <rect x="257" y="100" width="16" height="4"/>
+    <rect x="279" y="100" width="16" height="4"/>
+  </g>
+  <!-- Triangular pediment -->
+  <polygon points="95,95 200,55 305,95" fill="#f0e0a0"/>
+  <polygon points="100,95 200,60 300,95" fill="none" stroke="#c9a84c" stroke-width="2"/>
+  <!-- Pediment decoration - eagle or statue outline -->
+  <ellipse cx="200" cy="80" rx="12" ry="10" fill="#c9a84c" opacity="0.4"/>
+  <!-- Roof tiles -->
+  <rect x="85" y="92" width="230" height="5" rx="1" fill="#c9a84c"/>
+  <!-- Temple door -->
+  <rect x="182" y="115" width="36" height="23" rx="1" fill="#3a1a05"/>
+  <path d="M182,126 h36" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+  <!-- Trees on hill -->
+  <g fill="#1a4010">
+    <ellipse cx="75" cy="158" rx="12" ry="16"/>
+    <rect x="72" y="168" width="6" height="12" fill="#5a3010"/>
+    <ellipse cx="325" cy="160" rx="12" ry="16"/>
+    <rect x="322" y="170" width="6" height="12" fill="#5a3010"/>
+  </g>
+  <!-- Small statue silhouette on left -->
+  <rect x="130" y="118" width="6" height="15" fill="#d4b070" opacity="0.6"/>
+  <circle cx="133" cy="115" r="5" fill="#d4b070" opacity="0.6"/>
+  <!-- Ground/city below hill -->
+  <rect x="0" y="240" width="400" height="20" fill="#2a1005"/>
+  <!-- Label -->
+  <text x="200" y="255" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#c9a84c" font-weight="bold" letter-spacing="3">KAPITOL</text>
+</svg>

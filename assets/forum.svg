@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2840"/>
+      <stop offset="60%" stop-color="#3a5070"/>
+      <stop offset="100%" stop-color="#7090b0"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a08050"/>
+      <stop offset="100%" stop-color="#6a5030"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d8c890"/>
+      <stop offset="100%" stop-color="#a89050"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky (dawn/dusk) -->
+  <rect width="400" height="260" fill="url(#sky)"/>
+  <!-- Sun rising glow -->
+  <ellipse cx="200" cy="200" rx="280" ry="80" fill="#c06020" opacity="0.15"/>
+  <circle cx="200" cy="160" r="40" fill="#f08030" opacity="0.3"/>
+  <!-- Clouds -->
+  <ellipse cx="60" cy="50" rx="50" ry="16" fill="#b0c0d8" opacity="0.5"/>
+  <ellipse cx="340" cy="40" rx="45" ry="15" fill="#b0c0d8" opacity="0.4"/>
+  <!-- Ground / forum pavement -->
+  <rect x="0" y="210" width="400" height="50" fill="url(#ground)"/>
+  <!-- Pavement lines -->
+  <g stroke="#8a6a38" stroke-width="1" opacity="0.5">
+    <line x1="0" y1="222" x2="400" y2="222"/>
+    <line x1="0" y1="234" x2="400" y2="234"/>
+    <line x1="0" y1="246" x2="400" y2="246"/>
+    <line x1="40" y1="210" x2="40" y2="260"/>
+    <line x1="80" y1="210" x2="80" y2="260"/>
+    <line x1="120" y1="210" x2="120" y2="260"/>
+    <line x1="160" y1="210" x2="160" y2="260"/>
+    <line x1="200" y1="210" x2="200" y2="260"/>
+    <line x1="240" y1="210" x2="240" y2="260"/>
+    <line x1="280" y1="210" x2="280" y2="260"/>
+    <line x1="320" y1="210" x2="320" y2="260"/>
+    <line x1="360" y1="210" x2="360" y2="260"/>
+  </g>
+  <!-- BASILICA JULIA (left large building) -->
+  <rect x="10" y="110" width="130" height="105" rx="2" fill="url(#stone)"/>
+  <!-- Basilica colonnade -->
+  <g fill="#d0b870" opacity="0.8">
+    <rect x="18" y="115" width="9" height="80"/>
+    <rect x="34" y="115" width="9" height="80"/>
+    <rect x="50" y="115" width="9" height="80"/>
+    <rect x="66" y="115" width="9" height="80"/>
+    <rect x="82" y="115" width="9" height="80"/>
+    <rect x="98" y="115" width="9" height="80"/>
+    <rect x="114" y="115" width="9" height="80"/>
+    <rect x="130" y="115" width="9" height="80"/>
+  </g>
+  <!-- Basilica pediment -->
+  <polygon points="10,110 140,110 75,80" fill="#c8a860"/>
+  <!-- BASILICA AEMILIA (right) -->
+  <rect x="260" y="120" width="130" height="95" rx="2" fill="url(#stone)" opacity="0.9"/>
+  <!-- Colonnade -->
+  <g fill="#d0b870" opacity="0.8">
+    <rect x="268" y="125" width="9" height="70"/>
+    <rect x="284" y="125" width="9" height="70"/>
+    <rect x="300" y="125" width="9" height="70"/>
+    <rect x="316" y="125" width="9" height="70"/>
+    <rect x="332" y="125" width="9" height="70"/>
+    <rect x="348" y="125" width="9" height="70"/>
+    <rect x="364" y="125" width="9" height="70"/>
+    <rect x="380" y="125" width="9" height="70"/>
+  </g>
+  <polygon points="260,120 390,120 325,92" fill="#c8a860"/>
+  <!-- TEMPLE OF SATURN (center-left) -->
+  <rect x="140" y="75" width="80" height="140" rx="2" fill="#e8d898"/>
+  <!-- Temple steps -->
+  <rect x="135" y="205" width="90" height="7" rx="1" fill="#c8a870"/>
+  <rect x="138" y="211" width="84" height="5" rx="1" fill="#b89858"/>
+  <!-- Tall columns Saturn temple -->
+  <g fill="#f0e0a0">
+    <rect x="145" y="80" width="11" height="120"/>
+    <rect x="162" y="80" width="11" height="120"/>
+    <rect x="179" y="80" width="11" height="120"/>
+    <rect x="196" y="80" width="11" height="120"/>
+    <rect x="198" y="80" width="11" height="120"/>
+    <rect x="201" y="80" width="11" height="120"/>
+  </g>
+  <!-- Temple pediment -->
+  <polygon points="135,75 225,75 180,45" fill="#e8d898"/>
+  <polygon points="140,75 220,75 180,50" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+  <!-- Temple door -->
+  <rect x="170" y="155" width="22" height="50" rx="1" fill="#4a2008"/>
+  <!-- ARCH OF SEPTIMIUS SEVERUS (left area) -->
+  <g fill="#c8a860">
+    <rect x="30" y="140" width="70" height="70"/>
+    <rect x="28" y="138" width="74" height="8" rx="1"/>
+  </g>
+  <!-- Arch opening -->
+  <path d="M40,210 h50 v-40 q-25-28-50-0 z" fill="#8b6030"/>
+  <!-- Side arches -->
+  <path d="M32,210 h16 v-25 q-8-15-16-0 z" fill="#6b4020"/>
+  <path d="M82,210 h16 v-25 q-8-15-16-0 z" fill="#6b4020"/>
+  <!-- Inscription on arch -->
+  <rect x="35" y="145" width="60" height="10" rx="1" fill="#c9a84c" opacity="0.3"/>
+  <text x="65" y="153" text-anchor="middle" font-family="Georgia,serif" font-size="5" fill="#5a2a00">IMP · CAES</text>
+  <!-- COLUMN (Trajan column style, center) -->
+  <rect x="193" y="60" width="14" height="155" rx="2" fill="#d8c880"/>
+  <!-- Spiral decoration hint -->
+  <path d="M193,80 Q207,90 193,100 Q207,110 193,120 Q207,130 193,140 Q207,150 193,160" stroke="#c9a84c" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <!-- Column base -->
+  <rect x="187" y="205" width="26" height="8" rx="2" fill="#c9a84c" opacity="0.8"/>
+  <!-- Statue on top of column -->
+  <circle cx="200" cy="55" r="7" fill="#d4b870"/>
+  <rect x="197" y="60" width="6" height="10" fill="#d4b870"/>
+  <!-- ROSTRA (speaker's platform) -->
+  <rect x="145" y="195" width="110" height="18" rx="2" fill="#b89858"/>
+  <!-- Ship rams decoration on Rostra -->
+  <g fill="#8b6030">
+    <rect x="150" y="191" width="6" height="6" rx="1"/>
+    <rect x="165" y="191" width="6" height="6" rx="1"/>
+    <rect x="180" y="191" width="6" height="6" rx="1"/>
+    <rect x="220" y="191" width="6" height="6" rx="1"/>
+    <rect x="235" y="191" width="6" height="6" rx="1"/>
+    <rect x="245" y="191" width="6" height="6" rx="1"/>
+  </g>
+  <!-- Orator figure on rostra -->
+  <circle cx="200" cy="190" r="5" fill="#3a2008"/>
+  <rect x="197" y="194" width="6" height="3" rx="1" fill="#3a2008"/>
+  <!-- People in forum (silhouettes) -->
+  <g fill="#3a2008" opacity="0.6">
+    <circle cx="55" cy="215" r="5"/>
+    <rect x="51" y="219" width="8" height="4" rx="1"/>
+    <circle cx="350" cy="213" r="5"/>
+    <rect x="346" y="217" width="8" height="4" rx="1"/>
+    <circle cx="120" cy="218" r="4"/>
+    <rect x="117" y="221" width="6" height="3" rx="1"/>
+    <circle cx="280" cy="216" r="4"/>
+    <rect x="277" y="219" width="6" height="3" rx="1"/>
+  </g>
+  <!-- TEMPLE OF VESTA (right small) -->
+  <ellipse cx="360" cy="180" rx="30" ry="20" fill="#e8d890" opacity="0.8"/>
+  <g fill="#d0b870">
+    <rect x="332" y="165" width="8" height="35" rx="4"/>
+    <rect x="344" y="162" width="8" height="38" rx="4"/>
+    <rect x="356" y="160" width="8" height="40" rx="4"/>
+    <rect x="368" y="162" width="8" height="38" rx="4"/>
+    <rect x="380" y="165" width="8" height="35" rx="4"/>
+  </g>
+  <!-- Conical roof of Vesta -->
+  <ellipse cx="360" cy="162" rx="30" ry="5" fill="#c8a860"/>
+  <polygon points="330,165 390,165 360,140" fill="#a08040"/>
+  <!-- Sacred flame of Vesta -->
+  <ellipse cx="360" cy="172" rx="8" ry="5" fill="#f08020" opacity="0.7"/>
+  <circle cx="360" cy="170" r="3" fill="#f8d040" opacity="0.8"/>
+  <!-- Label -->
+  <text x="200" y="253" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#c9a84c" font-weight="bold" letter-spacing="2">FORUM ROMANUM</text>
+</svg>
