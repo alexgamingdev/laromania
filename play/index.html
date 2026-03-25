@@ -1352,20 +1352,23 @@ function lighten(hex) {
    SETUP OVERLAY
 ═══════════════════════════════════════════════ */
 let _setupNumPlayers = 4;
+// Persists entered names across player-count changes in setup
+const _setupNames = ['', '', '', ''];
 
 function setNumPlayers(n) {
     _setupNumPlayers = n;
     document.querySelectorAll('.npbtn').forEach((b, i) => {
         b.classList.toggle('active', [2,3,4][i] === n);
     });
+    // Save currently typed values before re-rendering
+    document.querySelectorAll('.player-name-input').forEach((el, i) => {
+        _setupNames[i] = el.value;
+    });
     renderNameInputs();
 }
 
 function renderNameInputs() {
     const container = document.getElementById('playerNameInputs');
-    // preserve existing values
-    const existing = Array.from(container.querySelectorAll('.player-name-input'))
-                          .map(el => el.value);
     container.innerHTML = '';
     for (let i = 0; i < _setupNumPlayers; i++) {
         const row = document.createElement('div');
@@ -1375,7 +1378,7 @@ function renderNameInputs() {
                  style="background:radial-gradient(circle at 35% 30%,${lighten(PLAYER_COLORS[i])},${PLAYER_COLORS[i]})">
             </div>
             <input class="player-name-input" id="pname-${i}" type="text" maxlength="20"
-                   placeholder="Spieler ${PLAYER_LABELS[i]}" value="${existing[i] || ''}">`;
+                   placeholder="Spieler ${PLAYER_LABELS[i]}" value="${_setupNames[i] || ''}">`;
         container.appendChild(row);
     }
 }
@@ -1406,8 +1409,13 @@ function startGame() {
 /* ═══════════════════════════════════════════════
    EVENT CARD FUNCTIONS
 ═══════════════════════════════════════════════ */
+function enableRolling() {
+    rolling = false;
+    document.getElementById('rollBtn').disabled = false;
+}
+
 function drawEventCard() {
-    if (!EVENT_CARDS.length) { rolling = false; document.getElementById('rollBtn').disabled = false; return; }
+    if (!EVENT_CARDS.length) { enableRolling(); return; }
     const card = EVENT_CARDS[Math.floor(Math.random() * EVENT_CARDS.length)];
     pendingCardEffect = card;
     showCardModal(card);
@@ -1421,13 +1429,16 @@ function showCardModal(card) {
     document.getElementById('ecType').textContent  = tx.cardType;
     document.getElementById('ecIcon').textContent  = card.icon;
 
-    // Replace {Name} placeholder with the actual special name
+    // Replace {Name} placeholder with the actual special name; if no special name,
+    // remove the entire elimination clause via a regex.
+    const CHOP_DE = / Falls du \{Name\} heißt, fliegst du raus!/;
+    const CHOP_EN = / If your name is \{Name\}, you are eliminated!/;
     const descDe = specialName
         ? (card.descDe || '').replace('{Name}', specialName)
-        : (card.descDe || '').replace(' Falls du {Name} heißt, fliegst du raus!', '');
+        : (card.descDe || '').replace(CHOP_DE, '');
     const descEn = specialName
         ? (card.descEn || '').replace('{Name}', specialName)
-        : (card.descEn || '').replace(' If your name is {Name}, you are eliminated!', '');
+        : (card.descEn || '').replace(CHOP_EN, '');
 
     document.getElementById('ecTitle').textContent = currentLang === 'de' ? card.titleDe : card.titleEn;
     document.getElementById('ecDesc').textContent  = currentLang === 'de' ? descDe : descEn;
@@ -1476,11 +1487,11 @@ function highlightField(idx, color) {
 }
 
 function applyCardEffect(card) {
-    if (!card) { rolling = false; document.getElementById('rollBtn').disabled = false; return; }
+    if (!card) { enableRolling(); return; }
     const pi    = activePlayer;
     const tx    = t();
     const color = PLAYER_COLORS[pi];
-    const name  = playerNames[pi];
+    const name  = playerNames[pi]; // already trimmed in startGame()
 
     if (card.skip) {
         skippedTurns[pi]++;
@@ -1500,7 +1511,7 @@ function applyCardEffect(card) {
         const dest = f.label || 'Start';
 
         if (card.special === 'chop' && specialName &&
-            name.trim().toLowerCase() === specialName.trim().toLowerCase()) {
+            name.toLowerCase() === specialName.toLowerCase()) {
             eliminatedPlayers[pi] = true;
             buildPlayerUI();
             statusHtml = tx.eliminated(name, color);
@@ -1537,8 +1548,7 @@ function applyCardEffect(card) {
     if (card.questionPool) {
         setTimeout(() => drawQuestionForPool(card.questionPool), 300);
     } else {
-        rolling = false;
-        document.getElementById('rollBtn').disabled = false;
+        enableRolling();
     }
 }
 
@@ -1547,14 +1557,14 @@ function applyCardEffect(card) {
 ═══════════════════════════════════════════════ */
 function drawQuestion(imgKey) {
     const pools = FIELD_QUESTION_POOLS[imgKey] || [];
-    if (!pools.length) { rolling = false; document.getElementById('rollBtn').disabled = false; return; }
+    if (!pools.length) { enableRolling(); return; }
     const poolKey = pools[Math.floor(Math.random() * pools.length)];
     drawQuestionForPool(poolKey);
 }
 
 function drawQuestionForPool(poolKey) {
     const pool = QUESTIONS[poolKey] || [];
-    if (!pool.length) { rolling = false; document.getElementById('rollBtn').disabled = false; return; }
+    if (!pool.length) { enableRolling(); return; }
     const q = pool[Math.floor(Math.random() * pool.length)];
     pendingQuestion = q;
     showQuestionModal(q, poolKey);
@@ -1583,8 +1593,7 @@ function showQuestionAnswer() {
 function dismissQuestion() {
     document.getElementById('questionModal').style.display = 'none';
     pendingQuestion = null;
-    rolling = false;
-    document.getElementById('rollBtn').disabled = false;
+    enableRolling();
 }
 
 /* ═══════════════════════════════════════════════
@@ -1658,7 +1667,11 @@ let currentY = 28;
 
 function rollDice() {
     if (rolling) return;
-    if (eliminatedPlayers[activePlayer]) return;
+    if (eliminatedPlayers[activePlayer]) {
+        document.getElementById('status').innerHTML =
+            t().eliminated(playerNames[activePlayer], PLAYER_COLORS[activePlayer]);
+        return;
+    }
 
     // Check if this player must skip a turn
     if (skippedTurns[activePlayer] > 0) {
@@ -1702,8 +1715,7 @@ function rollDice() {
         const f = FIELDS[newPos];
         if (newPos >= TOTAL - 1) {
             document.getElementById('status').innerHTML = t().victory(playerNames[activePlayer]);
-            rolling = false;
-            document.getElementById('rollBtn').disabled = false;
+            enableRolling();
         } else if (f.t === 'event') {
             document.getElementById('status').innerHTML =
                 t().rolled(activePlayer, result, f.label || ('Feld ' + (newPos + 1)));
@@ -1717,8 +1729,7 @@ function rollDice() {
         } else {
             document.getElementById('status').innerHTML =
                 t().rolled(activePlayer, result, f.label || ('Feld ' + (newPos + 1)));
-            rolling = false;
-            document.getElementById('rollBtn').disabled = false;
+            enableRolling();
         }
     }, 1250);
 }
