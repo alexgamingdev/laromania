@@ -1,0 +1,102 @@
+[
+  {
+    "icon": "🏇",
+    "titleDe": "Agitator-Sieg!",
+    "titleEn": "Agitator Victory!",
+    "descDe": "Du bist ein agitator und hast das Rennen gewonnen. Gehe zwei Felder weiter.",
+    "descEn": "You are an agitator and have won the race. Move two spaces forward.",
+    "effect": 2
+  },
+  {
+    "icon": "🐕",
+    "titleDe": "Streunerbiss!",
+    "titleEn": "Stray Dog Bite!",
+    "descDe": "Ein Streuner hat dich gebissen. Du bist tot! Gehe zum Start.",
+    "descEn": "A stray dog bit you. You are dead! Go back to Start.",
+    "goto": 0
+  },
+  {
+    "icon": "💀",
+    "titleDe": "Enthauptung!",
+    "titleEn": "Beheaded!",
+    "descDe": "Du wurdest geköpft. Gehe zum Start! Falls du {Name} heißt, fliegst du raus!",
+    "descEn": "You were beheaded. Go to Start! If your name is {Name}, you are eliminated!",
+    "goto": 0,
+    "special": "chop"
+  },
+  {
+    "icon": "🐴",
+    "titleDe": "Rennstallsturz!",
+    "titleEn": "Racing Fall!",
+    "descDe": "Du bist beim Wagenrennen vom Pferd gefallen! Gehe 5 Felder zurück.",
+    "descEn": "You fell off your horse during the chariot race! Move 5 spaces back.",
+    "effect": -5
+  },
+  {
+    "icon": "🏛️",
+    "titleDe": "Patron!",
+    "titleEn": "Patron!",
+    "descDe": "Du bist ein Patron! Gehe zum Kapitol!",
+    "descEn": "You are a Patron! Go to the Kapitol!",
+    "goto": 25
+  },
+  {
+    "icon": "📚",
+    "titleDe": "Schuleschwänzen!",
+    "titleEn": "Skipped School!",
+    "descDe": "Du hast in der Schule nicht aufgepasst! Gehe zur Schule zurück!",
+    "descEn": "You were not paying attention in school! Go back to the School!",
+    "goto": 12
+  },
+  {
+    "icon": "⛏️",
+    "titleDe": "Sklave!",
+    "titleEn": "Slave!",
+    "descDe": "Du bist nun ein Sklave auf dem Land! Gehe zur Villa Rustica!",
+    "descEn": "You are now a slave in the countryside! Go to the Villa Rustica!",
+    "goto": 4
+  },
+  {
+    "icon": "🔥",
+    "titleDe": "Großbrand!",
+    "titleEn": "Great Fire!",
+    "descDe": "Du wurdest bei einem großen Brand stark verletzt! Setze eine Runde aus!",
+    "descEn": "You were badly injured in a great fire! Skip one round!",
+    "effect": 0,
+    "skip": true
+  },
+  {
+    "icon": "😡",
+    "titleDe": "Unbeliebt!",
+    "titleEn": "Unpopular!",
+    "descDe": "Alle Römer hassen dich! Setze die nächste Runde aus!",
+    "descEn": "All Romans hate you! Skip the next round!",
+    "effect": 0,
+    "skip": true
+  },
+  {
+    "icon": "⬆️",
+    "titleDe": "Rangaufstieg!",
+    "titleEn": "Promotion!",
+    "descDe": "Du bist im Rang aufgestiegen! Gehe 3 Felder vor.",
+    "descEn": "You have been promoted in rank! Move 3 spaces forward.",
+    "effect": 3
+  },
+  {
+    "icon": "💰",
+    "titleDe": "Bestohlen!",
+    "titleEn": "Robbed!",
+    "descDe": "Du wurdest beklaut! Gehe 3 Felder zurück und beantworte eine Grammatikaufgabe.",
+    "descEn": "You were robbed! Move 3 spaces back and answer a grammar question.",
+    "effect": -3,
+    "questionPool": "lektion4"
+  },
+  {
+    "icon": "💎",
+    "titleDe": "Schatzfund!",
+    "titleEn": "Treasure Found!",
+    "descDe": "Du hast einen Schatz gefunden! Gehe zum Jupiter Tempel auf dem Forum Romanum!",
+    "descEn": "You found a treasure! Go to the Temple of Jupiter at the Forum Romanum!",
+    "goto": 16
+  }
+]

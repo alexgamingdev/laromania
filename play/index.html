@@ -652,6 +652,282 @@
         }
         .btn-card-close:hover { background: linear-gradient(135deg, #9070c0 0%, #7b5ea7 100%); }
 
+        /* ═══════════════════════════════════════
+           QUESTION MODAL
+        ═══════════════════════════════════════ */
+        #questionModal {
+            position: fixed;
+            inset: 0;
+            z-index: 210;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,.82);
+            backdrop-filter: blur(5px);
+            animation: fadeInModal .3s ease;
+            padding: 1rem;
+        }
+        #questionModal.visible { display: flex; }
+
+        .question-card-scene {
+            perspective: 1000px;
+            width: min(92vw, 310px);
+            min-height: 320px;
+        }
+        .question-card-inner {
+            width: 100%;
+            min-height: 320px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform .85s cubic-bezier(.4,0,.2,1);
+        }
+        .question-card-inner.flipped { transform: rotateY(180deg); }
+
+        .question-card-face {
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.4rem;
+            min-height: 320px;
+        }
+        .question-front {
+            background: linear-gradient(145deg, #0a2a0a, #041004);
+            border: 2px solid rgba(80,160,80,.6);
+            box-shadow: 0 0 50px rgba(60,140,60,.3), 0 20px 60px rgba(0,0,0,.7);
+        }
+        .qfront-icon  { font-size: 3.5rem; margin-bottom: .8rem; filter: drop-shadow(0 0 12px rgba(80,160,80,.8)); }
+        .qfront-label { font-size: .72rem; letter-spacing: .28em; color: rgba(100,200,100,.9); text-transform: uppercase; }
+        .qfront-sub   { font-size: .52rem; letter-spacing: .18em; color: rgba(80,160,80,.4); margin-top: .4rem; }
+
+        .question-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(160deg, #080d05, #040800);
+            border: 2px solid rgba(100,200,80,.45);
+            box-shadow: 0 0 35px rgba(80,160,60,.15), 0 20px 60px rgba(0,0,0,.7);
+            justify-content: flex-start;
+            padding: 1.2rem;
+            gap: .55rem;
+        }
+        .qback-type {
+            font-size: .48rem;
+            letter-spacing: .22em;
+            color: rgba(100,200,80,.6);
+            text-transform: uppercase;
+            align-self: flex-start;
+        }
+        .qback-lesson {
+            font-size: .54rem;
+            letter-spacing: .1em;
+            color: rgba(100,200,80,.5);
+            align-self: flex-start;
+            font-style: italic;
+        }
+        .qback-question {
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .07em;
+            color: var(--gold2);
+            text-align: center;
+            line-height: 1.45;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .qback-answer {
+            font-size: .63rem;
+            letter-spacing: .06em;
+            color: rgba(100,200,80,.85);
+            text-align: center;
+            line-height: 1.6;
+            background: rgba(80,160,60,.1);
+            border: 1px solid rgba(80,160,60,.3);
+            border-radius: 4px;
+            padding: .5rem .7rem;
+            width: 100%;
+        }
+        .btn-show-answer {
+            width: 100%;
+            background: linear-gradient(135deg, #2a6a20 0%, #1a4a12 100%);
+            color: #a0e080;
+            border: 1px solid rgba(80,160,60,.45);
+            padding: .5rem;
+            font-family: 'Cinzel', serif;
+            font-size: .65rem;
+            letter-spacing: .18em;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background .2s;
+            text-transform: uppercase;
+        }
+        .btn-show-answer:hover { background: linear-gradient(135deg, #3a8a28 0%, #2a6a20 100%); }
+
+        /* ═══════════════════════════════════════
+           SETUP OVERLAY
+        ═══════════════════════════════════════ */
+        #setupOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,.92);
+            backdrop-filter: blur(8px);
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        .setup-box {
+            background: linear-gradient(160deg, #160c03, #0a0500);
+            border: 2px solid rgba(201,168,76,.45);
+            border-radius: 12px;
+            padding: 2rem 1.6rem;
+            width: min(95vw, 420px);
+            box-shadow: 0 0 60px rgba(201,168,76,.1), 0 20px 60px rgba(0,0,0,.8);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .setup-title {
+            text-align: center;
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            letter-spacing: .25em;
+            text-shadow: 0 0 20px rgba(201,168,76,.5);
+        }
+        .setup-subtitle {
+            text-align: center;
+            font-size: .6rem;
+            letter-spacing: .2em;
+            color: rgba(201,168,76,.45);
+            margin-top: -.7rem;
+        }
+        .setup-section-label {
+            font-size: .58rem;
+            letter-spacing: .18em;
+            color: rgba(201,168,76,.55);
+            text-transform: uppercase;
+            margin-bottom: .4rem;
+        }
+        .num-player-btns {
+            display: flex;
+            gap: .5rem;
+        }
+        .npbtn {
+            flex: 1;
+            padding: .45rem;
+            font-family: 'Cinzel', serif;
+            font-size: .78rem;
+            letter-spacing: .12em;
+            background: rgba(201,168,76,.07);
+            color: rgba(201,168,76,.6);
+            border: 1px solid rgba(201,168,76,.22);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all .2s;
+            font-weight: 700;
+        }
+        .npbtn.active {
+            background: rgba(201,168,76,.18);
+            color: var(--gold2);
+            border-color: rgba(201,168,76,.6);
+        }
+        .npbtn:hover:not(.active) { border-color: rgba(201,168,76,.4); }
+
+        .player-name-row {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+        }
+        .player-name-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: inset 0 -1px 3px rgba(0,0,0,.4), inset 0 1px 3px rgba(255,255,255,.3);
+        }
+        .player-name-input {
+            flex: 1;
+            background: rgba(201,168,76,.06);
+            border: 1px solid rgba(201,168,76,.25);
+            border-radius: 4px;
+            padding: .4rem .6rem;
+            font-family: 'Cinzel', serif;
+            font-size: .7rem;
+            color: var(--gold);
+            outline: none;
+            transition: border-color .2s;
+            min-width: 0;
+        }
+        .player-name-input:focus { border-color: rgba(201,168,76,.55); }
+        .player-name-input::placeholder { color: rgba(201,168,76,.25); }
+
+        .special-name-input {
+            width: 100%;
+            background: rgba(139,26,26,.08);
+            border: 1px solid rgba(139,26,26,.3);
+            border-radius: 4px;
+            padding: .4rem .6rem;
+            font-family: 'Cinzel', serif;
+            font-size: .7rem;
+            color: #d08080;
+            outline: none;
+            transition: border-color .2s;
+        }
+        .special-name-input:focus { border-color: rgba(139,26,26,.55); }
+        .special-name-input::placeholder { color: rgba(200,100,100,.25); }
+        .special-name-hint {
+            font-size: .52rem;
+            color: rgba(200,100,100,.45);
+            letter-spacing: .06em;
+            margin-top: -.7rem;
+        }
+
+        .btn-start {
+            width: 100%;
+            background: linear-gradient(135deg, var(--red) 0%, #6b1212 100%);
+            color: #fff;
+            border: 2px solid rgba(201,168,76,.4);
+            padding: .7rem 1rem;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: .2em;
+            font-size: .82rem;
+            cursor: pointer;
+            transition: all .3s;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-top: .3rem;
+        }
+        .btn-start:hover {
+            background: linear-gradient(135deg, #a52222 0%, #8b1a1a 100%);
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(201,168,76,.25);
+        }
+
+        /* Eliminated player styling */
+        .player-btn.eliminated {
+            opacity: .3;
+            filter: grayscale(1);
+            cursor: not-allowed;
+        }
+        .score-cell.eliminated {
+            opacity: .35;
+            text-decoration: line-through;
+        }
+
+        /* Mobile improvements */
+        @media (max-width: 480px) {
+            .event-card-scene,
+            .question-card-scene { width: min(88vw, 280px); }
+            .setup-box { padding: 1.5rem 1.1rem; }
+            .top-bar { padding: .55rem .8rem; }
+        }
+
     </style>
 </head>
 <body>
@@ -764,6 +1040,63 @@
 
 </div><!-- /main -->
 
+<!-- ── Setup Overlay ── -->
+<div id="setupOverlay">
+    <div class="setup-box">
+        <h1 class="setup-title">LÁ ROMANIA</h1>
+        <p class="setup-subtitle">SPIELER EINRICHTEN</p>
+
+        <div>
+            <div class="setup-section-label">Anzahl Spieler</div>
+            <div class="num-player-btns">
+                <button class="npbtn" onclick="setNumPlayers(2)">2</button>
+                <button class="npbtn" onclick="setNumPlayers(3)">3</button>
+                <button class="npbtn active" onclick="setNumPlayers(4)">4</button>
+            </div>
+        </div>
+
+        <div>
+            <div class="setup-section-label">Spielernamen</div>
+            <div id="playerNameInputs" style="display:flex;flex-direction:column;gap:.5rem;"></div>
+        </div>
+
+        <div>
+            <div class="setup-section-label">⚔️ Name der Köpf-Karte</div>
+            <input class="special-name-input" id="specialNameInput"
+                   type="text" maxlength="30"
+                   placeholder="Beliebteste / gehasste Person...">
+            <p class="special-name-hint">
+                Bei der Enthauptungs-Karte: Spieler mit diesem Namen fliegt raus!
+            </p>
+        </div>
+
+        <button class="btn-start" onclick="startGame()">⚔ SPIEL STARTEN</button>
+    </div>
+</div>
+
+<!-- ── Question Modal ── -->
+<div id="questionModal">
+    <div class="question-card-scene">
+        <div class="question-card-inner" id="questionCardInner">
+            <!-- Front (face-down) -->
+            <div class="question-card-face question-front">
+                <div class="qfront-icon">❓</div>
+                <div class="qfront-label">FRAGE</div>
+                <div class="qfront-sub">LÁ ROMANIA</div>
+            </div>
+            <!-- Back (question + answer) -->
+            <div class="question-card-face question-back">
+                <div class="qback-type">FRAGEKARTE</div>
+                <div class="qback-lesson" id="qLesson"></div>
+                <div class="qback-question" id="qQuestion"></div>
+                <div class="qback-answer" id="qAnswer"></div>
+                <button class="btn-show-answer" id="qShowBtn" onclick="showQuestionAnswer()">ANTWORT ZEIGEN</button>
+                <button class="btn-card-close" id="qCloseBtn" onclick="dismissQuestion()">WEITER</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ── Event Card Modal ── -->
 <div id="eventModal" style="display:none;">
     <div class="event-card-scene">
@@ -840,76 +1173,56 @@ const FIELDS = [
 const TOTAL = FIELDS.length; // 27
 
 /* ═══════════════════════════════════════════════
-   EVENT CARDS
+   EVENT CARDS  (loaded from ../data/event-cards.json)
 ═══════════════════════════════════════════════ */
-const EVENT_CARDS = [
-    { icon:'🏆', titleDe:'Triumph!',              titleEn:'Triumph!',
-      descDe:'Ein Feldherr kehrt siegreich nach Rom zurück. Die Stadt jubelt dir zu!',
-      descEn:'A general returns victorious to Rome. The city cheers for you!',
-      effect: +3 },
-    { icon:'⚔️', titleDe:'Gladiatorenkampf',      titleEn:'Gladiatorial Combat',
-      descDe:'Du gewinnst deine Wette im Kolosseum. Glück ist auf deiner Seite!',
-      descEn:'You win your bet at the Colosseum. Luck is on your side!',
-      effect: +2 },
-    { icon:'🌊', titleDe:'Tiberüberschwemmung',   titleEn:'Tiber Flood',
-      descDe:'Der Tiber tritt über die Ufer und überflutet die Straßen der Stadt.',
-      descEn:'The Tiber bursts its banks and floods the streets of the city.',
-      effect: -2 },
-    { icon:'📜', titleDe:'Kaiserlicher Erlass',   titleEn:'Imperial Decree',
-      descDe:'Der Kaiser gewährt dir eine besondere Gunst. Du bist geehrt!',
-      descEn:'The emperor grants you a special favor. You are honored!',
-      effect: +1 },
-    { icon:'🌾', titleDe:'Schlechte Ernte',        titleEn:'Poor Harvest',
-      descDe:'Die Ernte fällt schlecht aus. Hunger und Unruhe breiten sich aus.',
-      descEn:'The harvest fails. Hunger and unrest spread across the city.',
-      effect: -3 },
-    { icon:'🐎', titleDe:'Wagenrennen',            titleEn:'Chariot Race',
-      descDe:'Dein Gespann gewinnt beim Circus Maximus! Die Menge tobt vor Begeisterung.',
-      descEn:'Your team wins at the Circus Maximus! The crowd erupts with excitement.',
-      effect: +4 },
-    { icon:'🤒', titleDe:'Erkrankung',             titleEn:'Illness',
-      descDe:'Du wirst krank und musst dich erholen. Deine Mitspieler ziehen vorbei.',
-      descEn:'You fall ill and must recover. Your fellow players move on without you.',
-      effect: 0, skip: true },
-    { icon:'⚡', titleDe:'Gunst der Götter',       titleEn:'Favor of the Gods',
-      descDe:'Jupiter schenkt dir seinen Segen. Die Götter sind dir wohlgesonnen!',
-      descEn:'Jupiter grants you his blessing. The gods smile upon you!',
-      effect: +2 },
-    { icon:'🔥', titleDe:'Unruhen in der Stadt',   titleEn:'City Unrest',
-      descDe:'Unruhen erschüttern die Stadt. Du musst einen langen Umweg nehmen.',
-      descEn:'Unrest shakes the city. You must take a lengthy detour.',
-      effect: -1 },
-    { icon:'🏛️', titleDe:'Senatssitzung',          titleEn:'Senate Session',
-      descDe:'Du wirst in eine endlose Senatssitzung gezogen. Die Zeit vergeht.',
-      descEn:'You are drawn into an endless senate session. Time slips away.',
-      effect: 0, skip: true },
-    { icon:'🍷', titleDe:'Festmahl',               titleEn:'Banquet',
-      descDe:'Ein prächtiges Festmahl beim Senator. Du genießt die Gastfreundschaft.',
-      descEn:"A magnificent banquet at the senator's villa. You enjoy the hospitality.",
-      effect: 0 },
-    { icon:'🪽', titleDe:'Geschenk des Merkur',    titleEn:'Gift of Mercury',
-      descDe:'Der Götterbote beschenkt dich mit Schnelligkeit und Glück.',
-      descEn:'The messenger god blesses you with speed and fortune.',
-      effect: +3 },
-];
+let EVENT_CARDS = [];   // populated by loadGameData()
 
-let skippedTurns    = [0, 0, 0, 0]; // one entry per player (matches NUM_PLAYERS)
-let pendingCardEffect = null;
+/* ═══════════════════════════════════════════════
+   QUESTIONS  (loaded from ../data/questions.json)
+═══════════════════════════════════════════════ */
+let QUESTIONS = {};     // populated by loadGameData()
+
+// Map location field img-key → question lesson pools
+const FIELD_QUESTION_POOLS = {
+    landgut:   ['lektion1_2', 'lektion3'],
+    mietshaus: ['lektion1_2'],
+    schule:    ['lektion4'],
+    forum:     ['lektion5'],
+    thermen:   ['lektion7'],
+    colosseum: ['lektion6'],
+    kapitol:   ['lektion5'],
+};
+
+const LESSON_LABELS = {
+    lektion1_2: 'Lektion 1+2 · Familie und Leben im alten Rom',
+    lektion3:   'Lektion 3 · Land',
+    lektion4:   'Lektion 4 · Schule / Grammatik',
+    lektion5:   'Lektion 5 · Forum Romanum',
+    lektion6:   'Lektion 6 · Circus Maximus',
+    lektion7:   'Lektion 7 · Thermen',
+};
+
+let skippedTurns      = [0, 0, 0, 0];
+let pendingCardEffect  = null;
+let pendingQuestion    = null;
 
 /* ═══════════════════════════════════════════════
    PLAYER STATE
 ═══════════════════════════════════════════════ */
 const PLAYER_COLORS = ['#c0392b','#2355b0','#1a8040','#b07010'];
 const PLAYER_LABELS = ['I','II','III','IV'];
-const NUM_PLAYERS   = 4;
+let numPlayers      = 4;
+let playerNames     = ['Spieler I','Spieler II','Spieler III','Spieler IV'];
+let specialName     = '';
+let eliminatedPlayers = [false, false, false, false];
 let currentLang = localStorage.getItem('viaromana_lang') || 'de';
 
 const TXT = {
     de: {
         choose: 'Wähle einen Spieler und würfle!',
         rolling: 'Würfeln&hellip; <strong style="color:var(--gold2);">●●●</strong>',
-        victory: (label) => `<strong style="color:var(--gold2);">VIKTORIA! Spieler ${label} gewinnt! 🏆</strong>`,
-        rolled: (idx, r, target) => `Spieler <strong style="color:${PLAYER_COLORS[idx]};">${PLAYER_LABELS[idx]}</strong> würfelt eine <strong style="color:var(--gold2);">${r}</strong> → ${target}`,
+        victory: (name) => `<strong style="color:var(--gold2);">VIKTORIA! ${name} gewinnt! 🏆</strong>`,
+        rolled: (idx, r, target) => `<strong style="color:${PLAYER_COLORS[idx]};">${playerNames[idx]}</strong> würfelt eine <strong style="color:var(--gold2);">${r}</strong> → ${target}`,
         eventHint: ' · <em style="color:#b090d0;">Ziehe eine Ereigniskarte!</em>',
         top: 'SPIELFELD',
         subtitle: 'SPIELFELD DER ANTIKEN WELT',
@@ -923,14 +1236,16 @@ const TXT = {
         effectBackward: (n) => `⬇ ${n} Feld${n === 1 ? '' : 'er'} zurück`,
         effectSkip:  '⏭ Setze eine Runde aus',
         effectNone:  '→ Bleib auf deinem Feld',
-        skipNotice: (label, color) => `Spieler <strong style="color:${color};">${label}</strong> setzt diese Runde aus.`,
-        cardMoved: (label, color, eff, target) => `Spieler <strong style="color:${color};">${label}</strong>: ${eff} → ${target}`,
+        effectGoto:  (label) => `→ Gehe zu ${label}`,
+        skipNotice: (name, color) => `<strong style="color:${color};">${name}</strong> setzt diese Runde aus.`,
+        cardMoved: (name, color, eff, target) => `<strong style="color:${color};">${name}</strong>: ${eff} → ${target}`,
+        eliminated: (name, color) => `<strong style="color:#d08080;">${name}</strong> wurde eliminiert! 💀`,
     },
     en: {
         choose: 'Choose a player and roll!',
         rolling: 'Rolling&hellip; <strong style="color:var(--gold2);">●●●</strong>',
-        victory: (label) => `<strong style="color:var(--gold2);">VICTORY! Player ${label} wins! 🏆</strong>`,
-        rolled: (idx, r, target) => `Player <strong style="color:${PLAYER_COLORS[idx]};">${PLAYER_LABELS[idx]}</strong> rolled <strong style="color:var(--gold2);">${r}</strong> → ${target}`,
+        victory: (name) => `<strong style="color:var(--gold2);">VICTORY! ${name} wins! 🏆</strong>`,
+        rolled: (idx, r, target) => `<strong style="color:${PLAYER_COLORS[idx]};">${playerNames[idx]}</strong> rolled <strong style="color:var(--gold2);">${r}</strong> → ${target}`,
         eventHint: ' · <em style="color:#b090d0;">Draw an event card!</em>',
         top: 'GAME BOARD',
         subtitle: 'BOARD OF THE ANCIENT WORLD',
@@ -944,8 +1259,10 @@ const TXT = {
         effectBackward: (n) => `⬇ Move back ${n} space${n === 1 ? '' : 's'}`,
         effectSkip:  '⏭ Skip next turn',
         effectNone:  '→ Stay on your field',
-        skipNotice: (label, color) => `Player <strong style="color:${color};">${label}</strong> skips this turn.`,
-        cardMoved: (label, color, eff, target) => `Player <strong style="color:${color};">${label}</strong>: ${eff} → ${target}`,
+        effectGoto:  (label) => `→ Go to ${label}`,
+        skipNotice: (name, color) => `<strong style="color:${color};">${name}</strong> skips this turn.`,
+        cardMoved: (name, color, eff, target) => `<strong style="color:${color};">${name}</strong>: ${eff} → ${target}`,
+        eliminated: (name, color) => `<strong style="color:#d08080;">${name}</strong> was eliminated! 💀`,
     }
 };
 
@@ -1032,9 +1349,73 @@ function lighten(hex) {
 }
 
 /* ═══════════════════════════════════════════════
+   SETUP OVERLAY
+═══════════════════════════════════════════════ */
+let _setupNumPlayers = 4;
+// Persists entered names across player-count changes in setup
+const _setupNames = ['', '', '', ''];
+
+function setNumPlayers(n) {
+    _setupNumPlayers = n;
+    document.querySelectorAll('.npbtn').forEach((b, i) => {
+        b.classList.toggle('active', [2,3,4][i] === n);
+    });
+    // Save currently typed values before re-rendering
+    document.querySelectorAll('.player-name-input').forEach((el, i) => {
+        _setupNames[i] = el.value;
+    });
+    renderNameInputs();
+}
+
+function renderNameInputs() {
+    const container = document.getElementById('playerNameInputs');
+    container.innerHTML = '';
+    for (let i = 0; i < _setupNumPlayers; i++) {
+        const row = document.createElement('div');
+        row.className = 'player-name-row';
+        row.innerHTML = `
+            <div class="player-name-dot"
+                 style="background:radial-gradient(circle at 35% 30%,${lighten(PLAYER_COLORS[i])},${PLAYER_COLORS[i]})">
+            </div>
+            <input class="player-name-input" id="pname-${i}" type="text" maxlength="20"
+                   placeholder="Spieler ${PLAYER_LABELS[i]}" value="${_setupNames[i] || ''}">`;
+        container.appendChild(row);
+    }
+}
+
+function startGame() {
+    numPlayers = _setupNumPlayers;
+
+    // Read player names
+    playerNames = [];
+    for (let i = 0; i < numPlayers; i++) {
+        const input = document.getElementById('pname-' + i);
+        playerNames.push(input?.value.trim() || `Spieler ${PLAYER_LABELS[i]}`);
+    }
+    specialName = document.getElementById('specialNameInput')?.value.trim() || '';
+
+    // Reset game state
+    positions         = Array(numPlayers).fill(0);
+    skippedTurns      = Array(numPlayers).fill(0);
+    eliminatedPlayers = Array(numPlayers).fill(false);
+    activePlayer      = 0;
+    rolling           = false;
+
+    document.getElementById('setupOverlay').style.display = 'none';
+    buildPlayerUI();
+    renderTokens();
+}
+
+/* ═══════════════════════════════════════════════
    EVENT CARD FUNCTIONS
 ═══════════════════════════════════════════════ */
+function enableRolling() {
+    rolling = false;
+    document.getElementById('rollBtn').disabled = false;
+}
+
 function drawEventCard() {
+    if (!EVENT_CARDS.length) { enableRolling(); return; }
     const card = EVENT_CARDS[Math.floor(Math.random() * EVENT_CARDS.length)];
     pendingCardEffect = card;
     showCardModal(card);
@@ -1047,14 +1428,30 @@ function showCardModal(card) {
 
     document.getElementById('ecType').textContent  = tx.cardType;
     document.getElementById('ecIcon').textContent  = card.icon;
+
+    // Replace {Name} placeholder with the actual special name; if no special name,
+    // remove the entire elimination clause via a regex.
+    const CHOP_DE = / Falls du \{Name\} heißt, fliegst du raus!/;
+    const CHOP_EN = / If your name is \{Name\}, you are eliminated!/;
+    const descDe = specialName
+        ? (card.descDe || '').replace('{Name}', specialName)
+        : (card.descDe || '').replace(CHOP_DE, '');
+    const descEn = specialName
+        ? (card.descEn || '').replace('{Name}', specialName)
+        : (card.descEn || '').replace(CHOP_EN, '');
+
     document.getElementById('ecTitle').textContent = currentLang === 'de' ? card.titleDe : card.titleEn;
-    document.getElementById('ecDesc').textContent  = currentLang === 'de' ? card.descDe  : card.descEn;
+    document.getElementById('ecDesc').textContent  = currentLang === 'de' ? descDe : descEn;
     document.getElementById('ecCloseBtn').textContent = tx.cardClose;
 
     const effEl = document.getElementById('ecEffect');
     if (card.skip) {
         effEl.textContent = tx.effectSkip;
         effEl.className   = 'ecback-effect effect-skip';
+    } else if (card.goto !== undefined) {
+        const dest = FIELDS[card.goto];
+        effEl.textContent = tx.effectGoto(dest ? dest.label : 'Start');
+        effEl.className   = 'ecback-effect effect-neutral';
     } else if (card.effect > 0) {
         effEl.textContent = tx.effectForward(card.effect);
         effEl.className   = 'ecback-effect effect-positive';
@@ -1077,33 +1474,58 @@ function dismissEventCard() {
     const card = pendingCardEffect;
     pendingCardEffect = null;
     applyCardEffect(card);
-    rolling = false;
-    document.getElementById('rollBtn').disabled = false;
+    // rolling is re-enabled inside applyCardEffect (or by the question modal on dismiss)
+}
+
+function highlightField(idx, color) {
+    const fieldEl = document.getElementById('field-' + idx);
+    if (fieldEl) {
+        fieldEl.style.transition = 'box-shadow .3s';
+        fieldEl.style.boxShadow  = '0 0 30px ' + color;
+        setTimeout(() => { fieldEl.style.boxShadow = ''; }, 1200);
+    }
 }
 
 function applyCardEffect(card) {
-    if (!card) return;
+    if (!card) { enableRolling(); return; }
     const pi    = activePlayer;
     const tx    = t();
     const color = PLAYER_COLORS[pi];
-    const label = PLAYER_LABELS[pi];
+    const name  = playerNames[pi]; // already trimmed in startGame()
 
     if (card.skip) {
         skippedTurns[pi]++;
     }
 
-    if (card.effect !== 0) {
-        const newPos = Math.max(0, Math.min(positions[pi] + card.effect, TOTAL - 1));
+    let newPos = positions[pi];
+    let statusHtml = '';
+
+    if (card.goto !== undefined) {
+        newPos = Math.max(0, Math.min(card.goto, TOTAL - 1));
         positions[pi] = newPos;
         renderTokens();
         updateScoreDisplay();
+        highlightField(newPos, color);
 
-        const fieldEl = document.getElementById('field-' + newPos);
-        if (fieldEl) {
-            fieldEl.style.transition = 'box-shadow .3s';
-            fieldEl.style.boxShadow  = '0 0 30px ' + color;
-            setTimeout(() => { fieldEl.style.boxShadow = ''; }, 1200);
+        const f = FIELDS[newPos];
+        const dest = f.label || 'Start';
+
+        if (card.special === 'chop' && specialName &&
+            name.toLowerCase() === specialName.toLowerCase()) {
+            eliminatedPlayers[pi] = true;
+            buildPlayerUI();
+            statusHtml = tx.eliminated(name, color);
+        } else if (newPos >= TOTAL - 1) {
+            statusHtml = tx.victory(name);
+        } else {
+            statusHtml = tx.cardMoved(name, color, tx.effectGoto(dest), dest);
         }
+    } else if (card.effect !== 0) {
+        newPos = Math.max(0, Math.min(positions[pi] + card.effect, TOTAL - 1));
+        positions[pi] = newPos;
+        renderTokens();
+        updateScoreDisplay();
+        highlightField(newPos, color);
 
         const f = FIELDS[newPos];
         const effText = card.effect > 0
@@ -1112,13 +1534,66 @@ function applyCardEffect(card) {
         const target = f.label || ('Feld ' + (newPos + 1));
 
         if (newPos >= TOTAL - 1) {
-            document.getElementById('status').innerHTML = tx.victory(label);
+            statusHtml = tx.victory(name);
         } else {
-            document.getElementById('status').innerHTML = tx.cardMoved(label, color, effText, target);
+            statusHtml = tx.cardMoved(name, color, effText, target);
         }
     } else if (card.skip) {
-        document.getElementById('status').innerHTML = tx.skipNotice(label, color);
+        statusHtml = tx.skipNotice(name, color);
     }
+
+    if (statusHtml) document.getElementById('status').innerHTML = statusHtml;
+
+    // If card requires a question answer, show question modal before unlocking rolling
+    if (card.questionPool) {
+        setTimeout(() => drawQuestionForPool(card.questionPool), 300);
+    } else {
+        enableRolling();
+    }
+}
+
+/* ═══════════════════════════════════════════════
+   QUESTION SYSTEM
+═══════════════════════════════════════════════ */
+function drawQuestion(imgKey) {
+    const pools = FIELD_QUESTION_POOLS[imgKey] || [];
+    if (!pools.length) { enableRolling(); return; }
+    const poolKey = pools[Math.floor(Math.random() * pools.length)];
+    drawQuestionForPool(poolKey);
+}
+
+function drawQuestionForPool(poolKey) {
+    const pool = QUESTIONS[poolKey] || [];
+    if (!pool.length) { enableRolling(); return; }
+    const q = pool[Math.floor(Math.random() * pool.length)];
+    pendingQuestion = q;
+    showQuestionModal(q, poolKey);
+}
+
+function showQuestionModal(q, poolKey) {
+    document.getElementById('qLesson').textContent   = LESSON_LABELS[poolKey] || poolKey;
+    document.getElementById('qQuestion').textContent = q.question;
+    document.getElementById('qAnswer').textContent   = '✔ ' + q.answer;
+    document.getElementById('qAnswer').style.display = 'none';
+    document.getElementById('qShowBtn').style.display = 'block';
+    document.getElementById('qCloseBtn').style.display = 'none';
+
+    const inner = document.getElementById('questionCardInner');
+    inner.classList.remove('flipped');
+    document.getElementById('questionModal').style.display = 'flex';
+    setTimeout(() => inner.classList.add('flipped'), 420);
+}
+
+function showQuestionAnswer() {
+    document.getElementById('qAnswer').style.display = 'block';
+    document.getElementById('qShowBtn').style.display = 'none';
+    document.getElementById('qCloseBtn').style.display = 'block';
+}
+
+function dismissQuestion() {
+    document.getElementById('questionModal').style.display = 'none';
+    pendingQuestion = null;
+    enableRolling();
 }
 
 /* ═══════════════════════════════════════════════
@@ -1130,23 +1605,27 @@ function buildPlayerUI() {
     row.innerHTML  = '';
     grid.innerHTML = '';
 
-    for (let i = 0; i < NUM_PLAYERS; i++) {
+    for (let i = 0; i < numPlayers; i++) {
+        const elim = eliminatedPlayers[i];
+
         // Button
         const btn = document.createElement('button');
-        btn.className = 'player-btn pc-' + i + (i === activePlayer ? ' active' : '');
-        btn.title = 'Spieler ' + PLAYER_LABELS[i];
-        btn.setAttribute('aria-label', 'Spieler ' + PLAYER_LABELS[i]);
-        btn.onclick = () => selectPlayer(i);
+        btn.className = 'player-btn pc-' + i
+            + (i === activePlayer ? ' active' : '')
+            + (elim ? ' eliminated' : '');
+        btn.title = playerNames[i];
+        btn.setAttribute('aria-label', playerNames[i]);
+        btn.onclick = () => { if (!elim) selectPlayer(i); };
         row.appendChild(btn);
 
         // Score cell
         const cell = document.createElement('div');
-        cell.className = 'score-cell';
+        cell.className = 'score-cell' + (elim ? ' eliminated' : '');
         cell.id = 'score-' + i;
         cell.innerHTML = `
             <div class="score-dot" style="background:radial-gradient(circle at 35% 30%,${lighten(PLAYER_COLORS[i])},${PLAYER_COLORS[i]})"></div>
             <div class="score-info">
-                <span class="score-name">Spieler ${PLAYER_LABELS[i]}</span>
+                <span class="score-name">${playerNames[i]}</span>
                 <span class="score-pos" id="spos-${i}">Feld 1</span>
             </div>`;
         grid.appendChild(cell);
@@ -1162,7 +1641,7 @@ function selectPlayer(i) {
 }
 
 function updateScoreDisplay() {
-    for (let i = 0; i < NUM_PLAYERS; i++) {
+    for (let i = 0; i < numPlayers; i++) {
         const el = document.getElementById('spos-' + i);
         if (el) {
             const f = FIELDS[positions[i]];
@@ -1188,12 +1667,17 @@ let currentY = 28;
 
 function rollDice() {
     if (rolling) return;
+    if (eliminatedPlayers[activePlayer]) {
+        document.getElementById('status').innerHTML =
+            t().eliminated(playerNames[activePlayer], PLAYER_COLORS[activePlayer]);
+        return;
+    }
 
     // Check if this player must skip a turn
     if (skippedTurns[activePlayer] > 0) {
         skippedTurns[activePlayer]--;
         document.getElementById('status').innerHTML =
-            t().skipNotice(PLAYER_LABELS[activePlayer], PLAYER_COLORS[activePlayer]);
+            t().skipNotice(playerNames[activePlayer], PLAYER_COLORS[activePlayer]);
         return;
     }
 
@@ -1212,8 +1696,7 @@ function rollDice() {
     diceCube.style.setProperty('--rx', `${currentX}deg`);
     diceCube.style.setProperty('--ry', `${currentY}deg`);
 
-    document.getElementById('status').innerHTML =
-        t().rolling;
+    document.getElementById('status').innerHTML = t().rolling;
 
     setTimeout(() => {
         diceCube.setAttribute('aria-label', `Würfel zeigt ${result}`);
@@ -1224,31 +1707,29 @@ function rollDice() {
         positions[activePlayer] = newPos;
 
         // Highlight field
-        const fieldEl = document.getElementById('field-' + newPos);
-        if (fieldEl) {
-            fieldEl.style.transition = 'box-shadow .3s';
-            fieldEl.style.boxShadow  = '0 0 30px ' + PLAYER_COLORS[activePlayer];
-            setTimeout(() => { fieldEl.style.boxShadow = ''; }, 1200);
-        }
+        highlightField(newPos, PLAYER_COLORS[activePlayer]);
 
         renderTokens();
         updateScoreDisplay();
 
         const f = FIELDS[newPos];
         if (newPos >= TOTAL - 1) {
-            document.getElementById('status').innerHTML = t().victory(PLAYER_LABELS[activePlayer]);
-            rolling = false;
-            document.getElementById('rollBtn').disabled = false;
+            document.getElementById('status').innerHTML = t().victory(playerNames[activePlayer]);
+            enableRolling();
         } else if (f.t === 'event') {
             document.getElementById('status').innerHTML =
                 t().rolled(activePlayer, result, f.label || ('Feld ' + (newPos + 1)));
             // Keep rolling=true and button disabled until card is dismissed
             drawEventCard();
+        } else if (f.t === 'loc') {
+            document.getElementById('status').innerHTML =
+                t().rolled(activePlayer, result, f.label || ('Feld ' + (newPos + 1)));
+            // Draw question for this location – keep rolling locked
+            drawQuestion(f.img);
         } else {
             document.getElementById('status').innerHTML =
                 t().rolled(activePlayer, result, f.label || ('Feld ' + (newPos + 1)));
-            rolling = false;
-            document.getElementById('rollBtn').disabled = false;
+            enableRolling();
         }
     }, 1250);
 }
@@ -1258,6 +1739,22 @@ document.getElementById('diceScene').addEventListener('click', rollDice);
 document.addEventListener('keydown', e => {
     if ((e.key === ' ' || e.key === 'Enter') && !rolling) rollDice();
 });
+
+/* ═══════════════════════════════════════════════
+   LOAD JSON DATA
+═══════════════════════════════════════════════ */
+async function loadGameData() {
+    try {
+        const [evtRes, qRes] = await Promise.all([
+            fetch('../data/event-cards.json'),
+            fetch('../data/questions.json'),
+        ]);
+        if (evtRes.ok) EVENT_CARDS = await evtRes.json();
+        if (qRes.ok)   QUESTIONS   = await qRes.json();
+    } catch (e) {
+        console.warn('Could not load game data JSON:', e);
+    }
+}
 
 /* ═══════════════════════════════════════════════
    PARTICLE BACKGROUND
@@ -1309,14 +1806,16 @@ document.addEventListener('keydown', e => {
    INIT
 ═══════════════════════════════════════════════ */
 buildBoard();
-buildPlayerUI();
-renderTokens();
+renderNameInputs();   // populate name inputs in setup overlay (default 4 players)
 
 const diceCube = document.getElementById('diceCube');
 if (diceCube) {
     diceCube.style.setProperty('--rx', '-22deg');
     diceCube.style.setProperty('--ry', '28deg');
 }
+
+// Load JSON data in background (ready before player hits Start)
+loadGameData();
 
 function applyPlayLanguage(lang) {
     currentLang = lang;
