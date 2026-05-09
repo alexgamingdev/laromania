@@ -16,6 +16,7 @@
             --red:   #8B1A1A;
             --dark:  #0d0700;
             --panel: #160b00;
+            --error: #d08080;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -761,7 +762,7 @@
             width: 100%;
             font-size: .53rem;
             letter-spacing: .08em;
-            color: #d08080;
+            color: var(--error);
             text-align: left;
             display: none;
         }
@@ -1115,7 +1116,7 @@
                 <div class="qback-type">FRAGEKARTE</div>
                 <div class="qback-lesson" id="qLesson"></div>
                 <div class="qback-question" id="qQuestion"></div>
-                <textarea class="qback-input" id="qInput" maxlength="300" placeholder=""></textarea>
+                <textarea class="qback-input" id="qInput" maxlength="300" placeholder="" aria-label=""></textarea>
                 <div class="qback-input-hint" id="qInputHint"></div>
                 <div class="qback-answer" id="qAnswer"></div>
                 <button class="btn-show-answer" id="qShowBtn" onclick="submitQuestionAnswer()">ANTWORT ABGEBEN</button>
@@ -1271,6 +1272,7 @@ const TXT = {
         questionSubmit: 'ANTWORT ABGEBEN',
         questionPlaceholder: 'Deine Antwort...',
         questionNeedInput: 'Bitte gib zuerst eine Antwort ein.',
+        questionInputAria: 'Antwort zur Frage eingeben',
     },
     en: {
         choose: 'Choose a player and roll!',
@@ -1297,6 +1299,7 @@ const TXT = {
         questionSubmit: 'SUBMIT ANSWER',
         questionPlaceholder: 'Your answer...',
         questionNeedInput: 'Please enter an answer first.',
+        questionInputAria: 'Enter answer to the question',
     }
 };
 
@@ -1632,6 +1635,7 @@ function submitQuestionAnswer() {
     }
     hint.style.display = 'none';
     answerInput.readOnly = true;
+    answerInput.setAttribute('aria-disabled', 'true');
     document.getElementById('qAnswer').style.display = 'block';
     document.getElementById('qShowBtn').style.display = 'none';
     document.getElementById('qCloseBtn').style.display = 'block';
@@ -1649,7 +1653,9 @@ function resetQuestionInput(tx) {
     const hint = document.getElementById('qInputHint');
     answerInput.value = '';
     answerInput.readOnly = false;
+    answerInput.setAttribute('aria-disabled', 'false');
     answerInput.placeholder = tx.questionPlaceholder;
+    answerInput.setAttribute('aria-label', tx.questionInputAria);
     hint.style.display = 'none';
     hint.textContent = '';
 }
