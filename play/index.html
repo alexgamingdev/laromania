@@ -1635,7 +1635,7 @@ function submitQuestionAnswer() {
     }
     hint.style.display = 'none';
     answerInput.readOnly = true;
-    answerInput.setAttribute('aria-disabled', 'true');
+    answerInput.setAttribute('aria-readonly', 'true');
     document.getElementById('qAnswer').style.display = 'block';
     document.getElementById('qShowBtn').style.display = 'none';
     document.getElementById('qCloseBtn').style.display = 'block';
@@ -1653,7 +1653,7 @@ function resetQuestionInput(tx) {
     const hint = document.getElementById('qInputHint');
     answerInput.value = '';
     answerInput.readOnly = false;
-    answerInput.setAttribute('aria-disabled', 'false');
+    answerInput.setAttribute('aria-readonly', 'false');
     answerInput.placeholder = tx.questionPlaceholder;
     answerInput.setAttribute('aria-label', tx.questionInputAria);
     hint.style.display = 'none';
@@ -1901,6 +1901,12 @@ function applyPlayLanguage(lang) {
     if (rollBtn) rollBtn.textContent = tx.rollBtn;
     const status = document.getElementById('status');
     if (status && !rolling) status.textContent = tx.choose;
+
+    const qInput = document.getElementById('qInput');
+    if (qInput) {
+        qInput.placeholder = tx.questionPlaceholder;
+        qInput.setAttribute('aria-label', tx.questionInputAria);
+    }
 }
 
 document.getElementById('langDeBtn')?.addEventListener('click', () => applyPlayLanguage('de'));
