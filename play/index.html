@@ -16,6 +16,7 @@
             --red:   #8B1A1A;
             --dark:  #0d0700;
             --panel: #160b00;
+            --error: #d08080;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -739,6 +740,32 @@
             display: flex;
             align-items: center;
         }
+        .qback-input {
+            width: 100%;
+            min-height: 80px;
+            resize: vertical;
+            border-radius: 4px;
+            border: 1px solid rgba(201,168,76,.35);
+            background: rgba(0,0,0,.35);
+            color: var(--gold2);
+            padding: .5rem .6rem;
+            font-family: 'Cinzel', serif;
+            font-size: .62rem;
+            letter-spacing: .06em;
+        }
+        .qback-input:focus {
+            outline: none;
+            border-color: rgba(201,168,76,.7);
+            box-shadow: 0 0 0 2px rgba(201,168,76,.2);
+        }
+        .qback-input-hint {
+            width: 100%;
+            font-size: .53rem;
+            letter-spacing: .08em;
+            color: var(--error);
+            text-align: left;
+            display: none;
+        }
         .qback-answer {
             font-size: .63rem;
             letter-spacing: .06em;
@@ -1089,8 +1116,10 @@
                 <div class="qback-type">FRAGEKARTE</div>
                 <div class="qback-lesson" id="qLesson"></div>
                 <div class="qback-question" id="qQuestion"></div>
+                <textarea class="qback-input" id="qInput" maxlength="300" placeholder="..." aria-label="Question answer input"></textarea>
+                <div class="qback-input-hint" id="qInputHint"></div>
                 <div class="qback-answer" id="qAnswer"></div>
-                <button class="btn-show-answer" id="qShowBtn" onclick="showQuestionAnswer()">ANTWORT ZEIGEN</button>
+                <button class="btn-show-answer" id="qShowBtn" onclick="submitQuestionAnswer()"></button>
                 <button class="btn-card-close" id="qCloseBtn" onclick="dismissQuestion()">WEITER</button>
             </div>
         </div>
@@ -1240,6 +1269,10 @@ const TXT = {
         skipNotice: (name, color) => `<strong style="color:${color};">${name}</strong> setzt diese Runde aus.`,
         cardMoved: (name, color, eff, target) => `<strong style="color:${color};">${name}</strong>: ${eff} → ${target}`,
         eliminated: (name, color) => `<strong style="color:#d08080;">${name}</strong> wurde eliminiert! 💀`,
+        questionSubmit: 'ANTWORT ABGEBEN',
+        questionPlaceholder: 'Deine Antwort...',
+        questionNeedInput: 'Bitte gib zuerst eine Antwort ein.',
+        questionInputAria: 'Antwort zur Frage eingeben',
     },
     en: {
         choose: 'Choose a player and roll!',
@@ -1263,6 +1296,10 @@ const TXT = {
         skipNotice: (name, color) => `<strong style="color:${color};">${name}</strong> skips this turn.`,
         cardMoved: (name, color, eff, target) => `<strong style="color:${color};">${name}</strong>: ${eff} → ${target}`,
         eliminated: (name, color) => `<strong style="color:#d08080;">${name}</strong> was eliminated! 💀`,
+        questionSubmit: 'SUBMIT ANSWER',
+        questionPlaceholder: 'Your answer...',
+        questionNeedInput: 'Please enter an answer first.',
+        questionInputAria: 'Enter answer to the question',
     }
 };
 
@@ -1571,10 +1608,12 @@ function drawQuestionForPool(poolKey) {
 }
 
 function showQuestionModal(q, poolKey) {
+    const tx = t();
     document.getElementById('qLesson').textContent   = LESSON_LABELS[poolKey] || poolKey;
     document.getElementById('qQuestion').textContent = q.question;
     document.getElementById('qAnswer').textContent   = '✔ ' + q.answer;
     document.getElementById('qAnswer').style.display = 'none';
+    resetQuestionInput(tx);
     document.getElementById('qShowBtn').style.display = 'block';
     document.getElementById('qCloseBtn').style.display = 'none';
 
@@ -1584,7 +1623,17 @@ function showQuestionModal(q, poolKey) {
     setTimeout(() => inner.classList.add('flipped'), 420);
 }
 
-function showQuestionAnswer() {
+function submitQuestionAnswer() {
+    const answerInput = document.getElementById('qInput');
+    const answer = answerInput.value.trim();
+    const hint = document.getElementById('qInputHint');
+    if (!answer) {
+        hint.textContent = t().questionNeedInput;
+        hint.style.display = 'block';
+        return;
+    }
+    hint.style.display = 'none';
+    answerInput.style.display = 'none';
     document.getElementById('qAnswer').style.display = 'block';
     document.getElementById('qShowBtn').style.display = 'none';
     document.getElementById('qCloseBtn').style.display = 'block';
@@ -1592,8 +1641,30 @@ function showQuestionAnswer() {
 
 function dismissQuestion() {
     document.getElementById('questionModal').style.display = 'none';
+    resetQuestionInput(t());
     pendingQuestion = null;
     enableRolling();
+}
+
+function resetQuestionInput(tx) {
+    const answerInput = document.getElementById('qInput');
+    const hint = document.getElementById('qInputHint');
+    if (!answerInput || !hint) return;
+    syncQuestionModalText(tx);
+    answerInput.value = '';
+    answerInput.style.display = 'block';
+    hint.style.display = 'none';
+    hint.textContent = '';
+}
+
+function syncQuestionModalText(tx) {
+    const answerInput = document.getElementById('qInput');
+    const submitBtn = document.getElementById('qShowBtn');
+    if (answerInput) {
+        answerInput.placeholder = tx.questionPlaceholder;
+        answerInput.setAttribute('aria-label', tx.questionInputAria);
+    }
+    if (submitBtn) submitBtn.textContent = tx.questionSubmit;
 }
 
 /* ═══════════════════════════════════════════════
@@ -1837,6 +1908,7 @@ function applyPlayLanguage(lang) {
     if (rollBtn) rollBtn.textContent = tx.rollBtn;
     const status = document.getElementById('status');
     if (status && !rolling) status.textContent = tx.choose;
+    syncQuestionModalText(tx);
 }
 
 document.getElementById('langDeBtn')?.addEventListener('click', () => applyPlayLanguage('de'));
